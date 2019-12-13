@@ -12,13 +12,13 @@ class UserProfileManager(BaseUserManager):
         if not email:
             raise ValueError('User must have an email address')
 
-        email = self.normailze_email(email)
+        email = self.normalize_email(email)
         user = self.model(email=email, name=name)
 
         user.set_password(password)
         user.save(using=self._db)
 
-        return User
+        return user
 
     def create_superuser(self, email, name, password):
         """Create and save a new superuser with hiven details"""
@@ -49,7 +49,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         """Retrive short name of user"""    
-        return self.NameError
+        return self.name
     
     def __str__(self):
         """Return string representation of our user"""
